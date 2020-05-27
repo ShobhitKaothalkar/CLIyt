@@ -31,11 +31,28 @@ while True:
 
   for tag in tags:
       results[tag['title']]='https://www.youtube.com'+tag['href']
-
+  if len(results)==0:
+    print("Sory. Please try searching again.")
+    continue
+  else:
+    pass
   for i,title in enumerate(list(results.keys())):
       print(f"{i+1}."+f" {title}")
   i=input("These are the top 5 results. Which one out of these? ")
+  while True:
+    try:
+      int(i)
+      break
+    except:
+      print("Please enter the corresponding number of the song you want")
+      i=input("These are the top 5 results. Which one out of these? ")
   m = input("type d to download or l to listen now: ")
+  while True:
+    if m == 'l' or m == 'd':
+      break
+    else:
+      print("Please enter either d or l")
+      m = input("type d to download or l to listen now: ")
   url = list(results.values())[int(i)-1]
   video = pafy.new(url)
   audio = video.getbestaudio(preftype="m4a")
